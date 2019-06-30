@@ -34,11 +34,14 @@ public class firstPersonController : MonoBehaviour
 
     private Rigidbody RigidbodyCorps = null;
 
+    private float CameraYOffSet;
+
     // Start is called before the first frame update
     void Start()
     {
         if (!RigidbodyCorps) RigidbodyCorps = gameObject.GetComponent<Rigidbody>();
         if (!RigidbodyCorps) RigidbodyCorps = gameObject.AddComponent<Rigidbody>();
+        CameraYOffSet = Camera.transform.localPosition.y;
     }
 
     // Update is called once per frame
@@ -56,7 +59,7 @@ public class firstPersonController : MonoBehaviour
                 Camera.transform.localPosition = new Vector3 
                 (
                     0,
-                    headBobing.Evaluate(Time.time/100 * speed) * HeadBobbingFactor * (VerticalAxe + HorizontalAxe),
+                    CameraYOffSet + headBobing.Evaluate(Time.time * speed) * HeadBobbingFactor * (VerticalAxe + HorizontalAxe),
                     0
                 ); 
 
